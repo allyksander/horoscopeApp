@@ -1,0 +1,49 @@
+@import "@styles/mixins.scss";
+@import "@styles/constants.scss";
+
+.horoscope-list {
+  display: grid;
+  align-items: flex-start;
+  gap: $offset-main;
+
+  @include media-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-laptop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-desctop {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  &__link {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: $offset-main;
+    padding: $offset-main;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    color: inherit;
+    transition: color $time ease-in-out, background-color $time ease-in-out;
+    text-decoration: none;
+
+    @include hover() {
+      background-color: $active-color;
+      color: $white;
+    }
+  }
+
+  &__icon {
+    width: 100px;
+    height: 100px;
+    grid-row: span 2;
+  }
+
+  &__name {
+    margin: 0;
+    text-transform: capitalize;
+    font-weight: bold;
+  }
+}

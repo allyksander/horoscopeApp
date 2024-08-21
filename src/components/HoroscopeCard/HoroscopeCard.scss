@@ -1,0 +1,39 @@
+@import "@styles/constants.scss";
+@import "@styles/mixins.scss";
+
+.horoscope-card {
+  display: grid;
+  align-items: flex-start;
+  gap: $offset-main;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @include media-tablet {
+    gap: $offset-main * 2;
+    grid-template-columns: auto 1fr;
+  }
+
+  &__data {
+    display: grid;
+    justify-content: center;
+    gap: $offset-sm;
+    text-align: center;
+  }
+
+  &__icon {
+    display: block;
+    width: 150px;
+    height: 150px;
+  }
+
+  &__name {
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  &__text {
+    @include media-tablet {
+      font-size: 24px;
+    }
+  }
+}

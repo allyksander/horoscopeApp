@@ -1,0 +1,24 @@
+@import "@styles/mixins.scss";
+@import "@styles/constants.scss";
+
+.error {
+  text-align: center;
+
+  &__title {
+    margin-top: 0;
+  }
+
+  &__link {
+    padding: $offset-sm;
+    text-decoration: none;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    color: inherit;
+    transition: color $time ease-in-out, background-color $time ease-in-out;
+
+    @include hover() {
+      background-color: $active-color;
+      color: $white;
+    }
+  }
+}

@@ -9,7 +9,11 @@
     "paths": {
       "@public/*": ["public/*"],
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
+      "@pages/*": ["src/pages/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"],
+      "@tcustomTypes/*": ["src/customTypes/*"]
     },
 
     /* Bundler mode */

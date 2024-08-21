@@ -1,0 +1,36 @@
+@import "@styles/constants.scss";
+@import "@styles/mixins.scss";
+
+.header {
+  position: sticky;
+  top: 0;
+  padding: $offset-main;
+  border-bottom: 1px solid $border-color;
+  background: $white;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $offset-main;
+  }
+
+  &__home {
+    transition: opacity $time ease-in-out;
+
+    @include hover() {
+      opacity: 0.75;
+    }
+  }
+
+  &__logo {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+
+  &__name {
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
