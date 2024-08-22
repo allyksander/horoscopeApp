@@ -33,7 +33,6 @@ export const LanguageContextProvider = ({
       }}
     >
       {children}
-      user : {JSON.stringify(WebApp.initDataUnsafe.user)}
     </LanguageContext.Provider>
   );
 };
