@@ -1,6 +1,8 @@
 @import "@styles/constants.scss";
 
 .layout {
+  background: $white;
+
   &__content {
     padding: $offset-main 0;
   }
