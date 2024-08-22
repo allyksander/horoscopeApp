@@ -2,6 +2,7 @@
 
 .layout {
   background: $white;
+  min-height: 100dvh;
 
   &__content {
     padding: $offset-main 0;
