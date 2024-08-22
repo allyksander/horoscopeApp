@@ -37,6 +37,7 @@ export const LanguageContextProvider = ({
       }}
     >
       {children}
+      user : {window.Telegram.WebApp.initDataUnsafe.user}
     </LanguageContext.Provider>
   );
 };
