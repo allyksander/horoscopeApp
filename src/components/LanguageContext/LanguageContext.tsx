@@ -24,8 +24,8 @@ export const LanguageContextProvider = ({
   const [language, setLanguage] = useState<Languages>(LanguagesList[0]);
 
   useEffect(() => {
-    if (window.Telegram.WebApp.user) {
-      setLanguage(window.Telegram.WebApp.user.language_code);
+    if (window.Telegram.WebApp.initDataUnsafe.user) {
+      setLanguage(window.Telegram.WebApp.initDataUnsafe.user.language_code);
     }
   }, []);
 
