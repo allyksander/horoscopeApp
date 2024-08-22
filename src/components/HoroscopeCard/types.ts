@@ -1,4 +1,6 @@
-export type TouchCoordinatesX = {
-  start: number;
-  end: number;
+import { ZodiacName } from "src/customTypes/ZodiacName";
+
+export type IHoroscopeCard = {
+  horoscope: string;
+  sign: ZodiacName;
 };

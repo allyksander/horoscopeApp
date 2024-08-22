@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LanguageContext } from "@components/LanguageContext/LanguageContext";
 import { Error } from "@components/Error/Error";
-import { IHoroscopeCard } from "./type";
+import { IHoroscopeCard } from "./types";
 import { translateSign } from "@utils/translateSign";
 import { getSignDate } from "@utils/getSignDate";
 import { fetchDataFromApi } from "@utils/fetchDataFromApi";
 import { ZodiacName } from "src/customTypes/ZodiacName";
-import { TouchCoordinatesX } from "./types";
 import { AppRoutes } from "@constants/routes";
 import "./HoroscopeCard.scss";
 
@@ -19,14 +18,22 @@ export const HoroscopeCard = () => {
     horoscope: "",
     sign: id as ZodiacName,
   });
-  const [touchCoordinatesX, setTouchCoordinatesX] = useState<TouchCoordinatesX>(
-    {
-      start: 0,
-      end: 0,
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const MIN_SWIPE_DISTANCE = 50;
+
+  const onTouchEnd = () => {
+    const distance = touchStart - touchEnd;
+    const isRightSwipe = distance < -MIN_SWIPE_DISTANCE;
+
+    if (!touchStart || !touchEnd) {
+      return;
     }
-  );
-  const isRightSwipe = () =>
-    touchCoordinatesX.end - touchCoordinatesX.start > 0;
+
+    if (isRightSwipe) {
+      naigate(AppRoutes.MAIN);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,25 +48,15 @@ export const HoroscopeCard = () => {
     fetchData();
   }, [language, id]);
 
-  if (isRightSwipe()) {
-    naigate(AppRoutes.MAIN);
-  }
-
   return data.sign ? (
     <div
       className="horoscope-card"
-      onTouchStart={(event) => {
-        setTouchCoordinatesX({
-          ...touchCoordinatesX,
-          start: event.changedTouches[0].clientX,
-        });
+      onTouchStart={(e) => {
+        setTouchEnd(0);
+        setTouchStart(e.targetTouches[0].clientX);
       }}
-      onTouchEndCapture={(event) => {
-        setTouchCoordinatesX({
-          ...touchCoordinatesX,
-          end: event.changedTouches[0].clientX,
-        });
-      }}
+      onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+      onTouchEnd={onTouchEnd}
     >
       <div className="horoscope-card__data">
         <img
