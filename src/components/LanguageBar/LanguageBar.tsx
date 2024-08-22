@@ -1,10 +1,7 @@
 import { useContext, useState } from "react";
-import "./LanguageBar.scss";
 import { LanguageContext } from "@components/LanguageContext/LanguageContext";
-
-type Languages = "ru" | "en";
-
-const languagesList: Languages[] = ["en", "ru"];
+import { LanguagesList } from "@constants/LanguagesList";
+import "./LanguageBar.scss";
 
 export const LanguageBar = () => {
   const { language, languageHandler } = useContext(LanguageContext);
@@ -30,7 +27,7 @@ export const LanguageBar = () => {
       {isOpen && <div className="language-bar__overlay" onClick={toggleBar} />}
       <div className="language-bar__dropdown">
         <ul className="language-bar__list">
-          {languagesList.map((item) => (
+          {LanguagesList.map((item) => (
             <li
               key={item}
               onClick={() => {
