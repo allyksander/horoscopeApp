@@ -13,7 +13,7 @@
       "@styles/*": ["src/styles/*"],
       "@utils/*": ["src/utils/*"],
       "@constants/*": ["src/constants/*"],
-      "@tcustomTypes/*": ["src/customTypes/*"]
+      "@customTypes/*": ["src/customTypes/*"]
     },
 
     /* Bundler mode */

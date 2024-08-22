@@ -1,5 +1,5 @@
-import { Languages } from "@components/LanguageContext/types";
-import { ZodiacName } from "@tcustomTypes/ZodiacName";
+import { Languages } from "@customTypes/Languages";
+import { ZodiacName } from "@customTypes/ZodiacName";
 
 export const translateSign = ({
   sign,

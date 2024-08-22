@@ -1,4 +1,4 @@
-import { Languages } from "@components/LanguageContext/types";
+import { Languages } from "@customTypes/Languages";
 import { getLanguagePreset } from "./getLanguagePreset";
 import { ZodiacName } from "src/customTypes/ZodiacName";
 

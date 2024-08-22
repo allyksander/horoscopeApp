@@ -1,4 +1,4 @@
-import { ZodiacName } from "@tcustomTypes/ZodiacName";
+import { ZodiacName } from "@customTypes/ZodiacName";
 
 export const getSignDate = (sign: ZodiacName) => {
   const zodiacDates = {

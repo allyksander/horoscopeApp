@@ -1,13 +1,9 @@
 import { createContext, ReactElement, useEffect, useState } from "react";
-import { ILanguageContext, Languages } from "./types";
+import { ILanguageContext } from "./types";
 import { LanguagesList } from "@constants/LanguagesList";
+import { Languages } from "@customTypes/Languages";
+import WebApp from "@twa-dev/sdk";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Telegram: any;
-  }
-}
 const languageContextInit = {
   language: LanguagesList[0],
   languageHandler: () => {},
@@ -24,8 +20,8 @@ export const LanguageContextProvider = ({
   const [language, setLanguage] = useState<Languages>(LanguagesList[0]);
 
   useEffect(() => {
-    if (window.Telegram.WebApp.initDataUnsafe.user) {
-      setLanguage(window.Telegram.WebApp.initDataUnsafe.user.language_code);
+    if (WebApp.initDataUnsafe.user) {
+      setLanguage(WebApp.initDataUnsafe.user.language_code as Languages);
     }
   }, []);
 
@@ -37,7 +33,7 @@ export const LanguageContextProvider = ({
       }}
     >
       {children}
-      user : {window.Telegram.WebApp.initDataUnsafe.user}
+      user : {JSON.stringify(WebApp.initDataUnsafe.user)}
     </LanguageContext.Provider>
   );
 };
