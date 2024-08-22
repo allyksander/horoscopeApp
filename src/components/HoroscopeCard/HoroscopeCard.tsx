@@ -8,6 +8,7 @@ import { getSignDate } from "@utils/getSignDate";
 import { fetchDataFromApi } from "@utils/fetchDataFromApi";
 import { ZodiacName } from "src/customTypes/ZodiacName";
 import { AppRoutes } from "@constants/routes";
+import { BackButton } from "@twa-dev/sdk/react";
 import "./HoroscopeCard.scss";
 
 export const HoroscopeCard = () => {
@@ -49,30 +50,33 @@ export const HoroscopeCard = () => {
   }, [language, id]);
 
   return data.sign ? (
-    <div
-      className="horoscope-card"
-      onTouchStart={(e) => {
-        setTouchEnd(0);
-        setTouchStart(e.targetTouches[0].clientX);
-      }}
-      onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
-      onTouchEnd={onTouchEnd}
-    >
-      <div className="horoscope-card__data">
-        <img
-          src={`https://img.icons8.com/clouds/100/${data.sign}.png`}
-          width={100}
-          height={100}
-          alt={id}
-          className="horoscope-card__icon"
-        />
-        <h2 className="horoscope-card__name">
-          {translateSign({ sign: data.sign, language: language })}
-        </h2>
-        <span className="horoscope-card__date">{getSignDate(data.sign)}</span>
+    <>
+      <BackButton onClick={() => naigate(AppRoutes.MAIN)} />
+      <div
+        className="horoscope-card"
+        onTouchStart={(e) => {
+          setTouchEnd(0);
+          setTouchStart(e.targetTouches[0].clientX);
+        }}
+        onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+        onTouchEnd={onTouchEnd}
+      >
+        <div className="horoscope-card__data">
+          <img
+            src={`https://img.icons8.com/clouds/100/${data.sign}.png`}
+            width={100}
+            height={100}
+            alt={id}
+            className="horoscope-card__icon"
+          />
+          <h2 className="horoscope-card__name">
+            {translateSign({ sign: data.sign, language: language })}
+          </h2>
+          <span className="horoscope-card__date">{getSignDate(data.sign)}</span>
+        </div>
+        <span className="horoscope-card__text">{data.horoscope}</span>
       </div>
-      <span className="horoscope-card__text">{data.horoscope}</span>
-    </div>
+    </>
   ) : (
     <Error />
   );
