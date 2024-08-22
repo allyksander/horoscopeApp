@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { LanguageContext } from "@components/LanguageContext/LanguageContext";
 import { Error } from "@components/Error/Error";
 import { IHoroscopeCard } from "./type";
@@ -7,15 +7,26 @@ import { translateSign } from "@utils/translateSign";
 import { getSignDate } from "@utils/getSignDate";
 import { fetchDataFromApi } from "@utils/fetchDataFromApi";
 import { ZodiacName } from "src/customTypes/ZodiacName";
+import { TouchCoordinatesX } from "./types";
+import { AppRoutes } from "@constants/routes";
 import "./HoroscopeCard.scss";
 
 export const HoroscopeCard = () => {
   const { id } = useParams();
+  const naigate = useNavigate();
   const { language } = useContext(LanguageContext);
   const [data, setData] = useState<IHoroscopeCard>({
     horoscope: "",
     sign: id as ZodiacName,
   });
+  const [touchCoordinatesX, setTouchCoordinatesX] = useState<TouchCoordinatesX>(
+    {
+      start: 0,
+      end: 0,
+    }
+  );
+  const isRightSwipe = () =>
+    touchCoordinatesX.end - touchCoordinatesX.start > 0;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +41,26 @@ export const HoroscopeCard = () => {
     fetchData();
   }, [language, id]);
 
+  if (isRightSwipe()) {
+    naigate(AppRoutes.MAIN);
+  }
+
   return data.sign ? (
-    <div className="horoscope-card">
+    <div
+      className="horoscope-card"
+      onTouchStart={(event) => {
+        setTouchCoordinatesX({
+          ...touchCoordinatesX,
+          start: event.changedTouches[0].clientX,
+        });
+      }}
+      onTouchEndCapture={(event) => {
+        setTouchCoordinatesX({
+          ...touchCoordinatesX,
+          end: event.changedTouches[0].clientX,
+        });
+      }}
+    >
       <div className="horoscope-card__data">
         <img
           src={`https://img.icons8.com/clouds/100/${data.sign}.png`}
